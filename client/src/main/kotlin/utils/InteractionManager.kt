@@ -114,7 +114,7 @@ class InteractionManager(
                 result.message?.let { userManager.writeLine(it) }
             }
 
-            null -> userManager.writeLine("Сервер вернул непотребщину")
+            null -> userManager.writeLine("Сервер вернул ошибку")
         }
 
     }

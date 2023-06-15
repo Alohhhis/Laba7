@@ -3,6 +3,7 @@ package commands
 import ArgumentType
 import CommandResult
 import data.User
+import exceptions.RegistrationExeption
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
@@ -21,10 +22,10 @@ class Register : StorageCommand() {
 
         val deserializedUser: User = Json.decodeFromString(user)
 
-        return if (usersStorage.register(deserializedUser.username, deserializedUser.password)) {
-            return CommandResult.Success("register")
+        return if(usersStorage.register(deserializedUser.username, deserializedUser.password)) {
+            CommandResult.Success("Register")
         } else {
-            CommandResult.Failure("register", )
+            CommandResult.Failure("Register", RegistrationExeption("Не удалось зарегистрироваться"))
         }
     }
 

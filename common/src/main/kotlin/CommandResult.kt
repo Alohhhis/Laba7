@@ -1,5 +1,7 @@
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import CommandResult.Failure
+import CommandResult.Success
 
 /**
  * Закрытый класс для результатов выполнения команд.
@@ -23,5 +25,5 @@ sealed class CommandResult {
      * @param генерирует исключение, которое произошло
      */
     @Serializable
-    data class Failure(val commandName: String) : CommandResult()
+    data class Failure(val commandName: String, val throwable: @Contextual Throwable) : CommandResult()
 }

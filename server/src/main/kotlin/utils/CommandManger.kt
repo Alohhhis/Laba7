@@ -19,7 +19,8 @@ class CommandManager(): KoinComponent {
         "remove_head" to RemoveHead(),
         "show" to Show(),
         "update" to Update(),
-        "login" to Login()
+        "login" to Login(),
+        "register" to Register()
     )
     /**
      * Проверка, существует ли такая команда
