@@ -1,3 +1,3 @@
 package exceptions
 
-class RegistrationExeption(message: String?) : Throwable(message)
+class RegistrationException(message: String?) : Throwable(message)

@@ -2,7 +2,8 @@ package commands
 
 import ArgumentType
 import CommandResult
-import exceptions.ParametrException
+import exceptions.ParameterException
+
 
 class RemoveByKey : StorageCommand() {
     override fun getDescription(): String = "remove_key : удалить элемент из коллекции по его ключу"
@@ -12,7 +13,7 @@ class RemoveByKey : StorageCommand() {
         val userKey = args[0] as Int
         val collection = storage.getCollection { true }
         if (userKey !in collection.keys) {
-            return CommandResult.Failure("Remove_greater")
+            return CommandResult.Failure("Remove_greater", ParameterException("Элемента с таким ключом не существует"))
         }
         previousPair.add(userKey to collection[userKey])
         storage.removeKey(userKey)

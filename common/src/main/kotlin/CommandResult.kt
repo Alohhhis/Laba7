@@ -1,28 +1,28 @@
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.Serializable
 import CommandResult.Failure
 import CommandResult.Success
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 
 /**
- * Закрытый класс для результатов выполнения команд.
+ * Sealed class for results of the commands.
  *
- * Может быть либо [Success], либо [Failure]
+ * Can be either [Success] or [Failure]
  */
 sealed class CommandResult {
     /**
-     * При успешном выполнении команды
+     * When command executed successfully
      *
-     * @param CommandName - имя выполняемой команды
-     * @param текст сообщения для пользователя
+     * @param commandName the name of the executed command
+     * @param message text for the user
      */
     @Serializable
     data class Success(val commandName: String, val message: String? = null) : CommandResult()
 
     /**
-     * При неправильном выполнении команды
+     * When command executed wrongly
      *
-     * @param CommandName имя (не) выполненной команды
-     * @param генерирует исключение, которое произошло
+     * @param commandName the name of the (not) executed command
+     * @param throwable the exception which occurred
      */
     @Serializable
     data class Failure(val commandName: String, val throwable: @Contextual Throwable) : CommandResult()

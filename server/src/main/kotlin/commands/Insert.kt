@@ -3,7 +3,8 @@ package commands
 import ArgumentType
 import CommandResult
 import data.Vehicle
-import exceptions.ParametrException
+import exceptions.ParameterException
+
 
 
 class Insert : StorageCommand() {
@@ -14,7 +15,7 @@ class Insert : StorageCommand() {
         val userKey = args[0] as Int
         val collection = storage.getCollection { true }
         if (userKey in collection.keys) {
-            return CommandResult.Failure("Insert")
+            return CommandResult.Failure("Insert", ParameterException("Элемент с таким ключом уже существует"))
         }
         previousPair.add(userKey to collection[userKey])
         storage.insert(userKey, args[1] as Vehicle)

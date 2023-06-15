@@ -3,6 +3,7 @@ package commands
 import ArgumentType
 import CommandResult
 import data.Vehicle
+import exceptions.ParameterException
 
 /**
  * Класс UpdateCommand отвечает за обновление конкретного автомобиля в коллекции VehicleCollection
@@ -20,7 +21,7 @@ class Update : StorageCommand() {
         val userKey = args[0] as Int
         val collection = storage.getCollection { true }
         if (userKey !in collection.keys) {
-            return CommandResult.Failure("Update")
+            return CommandResult.Failure("Update", ParameterException("Элемента с таким ключом не существует"))
         }
         previousPair.add(userKey to collection[userKey])
         storage.update(userKey, args[1] as Vehicle)
