@@ -14,10 +14,11 @@ class HashingPassword {
     }
 
     // Функция для хэширования пароля с солью
-    fun hashPassword(password: String, salt: String): String {
-        val bytes = password.toByteArray() + salt.toByteArray()
-        val md = MessageDigest.getInstance("SHA-256")
+    fun hashPassword(password: String, salt: String? = null): String {
+        val bytes = password.toByteArray() + (salt ?: generateSalt()).toByteArray()
+        val md = MessageDigest.getInstance("SHA-384")
         val digest = md.digest(bytes)
         return digest.fold("", { str, it -> str + "%02x".format(it) })
+
     }
 }
