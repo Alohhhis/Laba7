@@ -3,7 +3,7 @@ package commands
 import ArgumentType
 import CommandResult
 import data.User
-import exceptions.RegistrationExeption
+import exceptions.RegistrationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
@@ -25,7 +25,7 @@ class Register : StorageCommand() {
         return if(usersStorage.register(deserializedUser.username, deserializedUser.password)) {
             CommandResult.Success("Register")
         } else {
-            CommandResult.Failure("Register", RegistrationExeption("Не удалось зарегистрироваться"))
+            CommandResult.Failure("Register", RegistrationException("Не удалось зарегистрироваться"))
         }
     }
 
