@@ -3,6 +3,8 @@ package utils
  * Interface for interacting with the collection
  */
 interface Storage<T, K, V> {
+    abstract val vehicle: Any
+
     fun getCollection(predicate: Map.Entry<K, V>.() -> Boolean): T
     fun removeKey(id: K)
 

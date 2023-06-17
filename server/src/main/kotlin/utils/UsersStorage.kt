@@ -59,4 +59,21 @@ class UsersStorage(private val dBManager: DataBaseManager) {
             false
         }
     }
+
+    fun validateToken(token: String): String? {
+        val jwtConsumer = JwtConsumerBuilder()
+            .setRequireExpirationTime()
+            .setAllowedClockSkewInSeconds(40)
+            .setVerificationKey(HmacKey(secretKey.toByteArray()))
+            .build()
+
+        return try {
+            val claims = jwtConsumer.processToClaims(token)
+            claims.getClaimValue("username", String::class.java)
+        } catch (e: JoseException) {
+            // Handle exception, possibly log it, and return null
+            println("Error during token validation: ${e.message}")
+            null
+        }
+    }
 }
